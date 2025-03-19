@@ -1,65 +1,56 @@
-# Fastify API with TypeScript and Biome
+# Fastify API Template with TypeScript and Biome
 
-A modern Fastify API project using TypeScript for type safety and Biome for linting and formatting.
+A modern Fastify API template that provides a robust foundation for building scalable web services. This template comes with a comprehensive set of pre-configured plugins and utilities that can be easily customized through a global configuration object when creating the server.
 
 ## Features
 
-- Fastify web framework
-- TypeScript for type safety
-- Biome for linting and formatting
-- CORS enabled
-- Development mode with hot reload
-- Health check endpoint
+- **Type Safety**: Built with TypeScript for enhanced developer experience and code reliability
+- **Modern Tooling**: Uses Biome for fast, consistent code linting and formatting
+- **Development Ready**: Hot reload support for rapid development
+- **Production Optimized**: Includes essential security, monitoring, and performance features
+- **Flexible Configuration**: All plugins can be configured through a single configuration object
+- **API Documentation**: Automatic Swagger/OpenAPI documentation in development mode
+
+## Included Plugins
+
+### Official Fastify Plugins
+- `@fastify/cors`: Configurable CORS support
+- `@fastify/helmet`: Security headers for protection against common web vulnerabilities
+- `@fastify/cookie`: Cookie parsing and serialization
+- `@fastify/rate-limit`: Request rate limiting for API protection
+- `@fastify/sensible`: Adds useful utilities and HTTP helpers
+- `@fastify/swagger` & `@fastify/swagger-ui`: API documentation (development mode only)
+
+### Custom Plugins
+- **Logger Plugin**: Enhanced logging with request tracking and pretty printing in development
+- **Monitoring Plugin**: Request duration tracking and performance monitoring
+- **Error Handler**: Standardized error responses with validation support
+- **Server Start Plugin**: Graceful server startup/shutdown with environment-based configuration
+- **Health Check**: Built-in health check endpoint for monitoring
 
 ## Prerequisites
 
-- Node.js (v18 or higher)
-- npm or yarn
+- Node.js
+- npm, pnpm, or yarn
 
 ## Setup
 
 1. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 
 2. Start the development server:
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 3. Build for production:
 ```bash
-npm run build
+pnpm run build
 ```
 
 4. Start the production server:
 ```bash
-npm start
-```
-
-## Available Scripts
-
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build the project
-- `npm start` - Start the production server
-- `npm run lint` - Run Biome linter
-- `npm run format` - Format code using Biome
-- `npm run check` - Run Biome check and apply fixes
-
-## API Endpoints
-
-- `GET /` - Welcome message
-- `GET /health` - Health check endpoint
-
-## Project Structure
-
-```
-.
-├── src/
-│   └── index.ts      # Main application entry point
-├── dist/             # Compiled JavaScript files
-├── package.json      # Project dependencies and scripts
-├── tsconfig.json     # TypeScript configuration
-└── biome.json        # Biome configuration
+pnpm start
 ```
