@@ -1,0 +1,51 @@
+{
+  "name": "Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "amodio.toggle-excluded-files",
+        "biomejs.biome",
+        "logerfo.open-all-files",
+        "mhutchie.git-graph"
+      ],
+      "settings": {
+        "git.autofetch": true,
+        "git.confirmSync": false,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit"
+        },
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.emptySelectionClipboard": true,
+        "editor.formatOnSave": true,
+        "editor.rulers": [88],
+        "editor.tabSize": 2,
+        "editor.wordWrapColumn": 88,
+        "explorer.sortOrder": "filesFirst",
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+          "README.md": "*"
+        },
+        "explorer.sortOrderLexicographicOptions": "upper",
+        "[python]": {
+          "editor.tabSize": 4,
+          "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+          }
+        },
+        "files.exclude": {
+          ".git/**": true,
+          "**/.pnpm-store/**": true,
+          "**/.pulumi/**": true,
+          "**/bin/**": true,
+          "**/node_modules/**": true,
+          "**/obj/**": true
+        }
+      }
+    }
+  }
+}
