@@ -13,11 +13,11 @@ export async function registerRateLimit(
   server: FastifyInstance,
   options?: RateLimitOptions,
 ): Promise<void> {
-  const config: FastifyRateLimitOptions = {
+  const params: FastifyRateLimitOptions = {
     max: 100,
     timeWindow: '1 minute',
     ...options,
   }
 
-  await server.register(rateLimit, config)
+  await server.register(rateLimit, params)
 }

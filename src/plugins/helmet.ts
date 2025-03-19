@@ -13,10 +13,10 @@ export async function registerHelmet(
   server: FastifyInstance,
   options?: HelmetOptions,
 ): Promise<void> {
-  const config: FastifyHelmetOptions = {
+  const params: FastifyHelmetOptions = {
     global: true,
     ...options,
   }
 
-  await server.register(helmet, config)
+  await server.register(helmet, params)
 }

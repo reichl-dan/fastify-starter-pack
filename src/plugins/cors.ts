@@ -13,11 +13,11 @@ export async function registerCors(
   server: FastifyInstance,
   options?: CorsOptions,
 ): Promise<void> {
-  const config: FastifyCorsOptions = {
+  const params: FastifyCorsOptions = {
     origin: true,
     credentials: true,
     ...options,
   }
 
-  await server.register(cors, config)
+  await server.register(cors, params)
 }

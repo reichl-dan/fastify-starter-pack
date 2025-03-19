@@ -1,3 +1,4 @@
+import * as config from '../config'
 import type { FastifyInstance } from 'fastify'
 import { type CookieOptions, registerCookie } from './cookie'
 import { type CorsOptions, registerCors } from './cors'
@@ -43,7 +44,7 @@ export async function registerPlugins(
   await registerRateLimit(server, options.rateLimit)
 
   // Register development plugins
-  if (process.env.NODE_ENV === 'development') {
+  if (config.isDevelopment) {
     const { registerSwagger } = await import('./swagger.js')
     await registerSwagger(server, options.swagger)
   }

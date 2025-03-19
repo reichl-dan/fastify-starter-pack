@@ -1,6 +1,7 @@
+import * as config from '../config'
+import type { FastifyInstance } from 'fastify'
 import type { FastifyCookieOptions } from '@fastify/cookie'
 import cookie from '@fastify/cookie'
-import type { FastifyInstance } from 'fastify'
 
 export type CookieOptions = Partial<FastifyCookieOptions>
 
@@ -13,11 +14,11 @@ export async function registerCookie(
   server: FastifyInstance,
   options?: CookieOptions,
 ): Promise<void> {
-  const config: FastifyCookieOptions = {
-    secret: process.env.COOKIE_SECRET || 'development-secret',
+  const params: FastifyCookieOptions = {
+    secret: config.cookieSecret,
     hook: 'onRequest',
     parseOptions: {
-      secure: process.env.NODE_ENV === 'production',
+      secure: config.isProduction,
       httpOnly: true,
       sameSite: 'lax',
       ...options?.parseOptions,
@@ -25,5 +26,5 @@ export async function registerCookie(
     ...options,
   }
 
-  await server.register(cookie, config)
+  await server.register(cookie, params)
 }

@@ -1,3 +1,4 @@
+import * as config from '../config'
 import type {
   FastifyError,
   FastifyInstance,
@@ -8,8 +9,10 @@ import type {
 import fp from 'fastify-plugin'
 
 export interface ErrorResponse {
-  error: string
   statusCode: number
+  error: string
+  message: string
+  stack?: string
   validation?: Array<{
     message: string
     field?: string
@@ -35,8 +38,9 @@ const defineErrorHandlerPlugin: FastifyPluginAsync = async (
 
       // Apply default error response
       const response: ErrorResponse = {
-        error: error.message || 'Internal Server Error',
-        statusCode: error.statusCode || 500,
+        statusCode: reply.statusCode,
+        error: error.name || 'Error',
+        message: error.message || 'An error occurred',
       }
 
       // Handle validation errors
@@ -48,9 +52,9 @@ const defineErrorHandlerPlugin: FastifyPluginAsync = async (
         }))
       }
 
-      // Include stack trace if in development
-      if (process.env.NODE_ENV === 'development' && error.stack) {
-        Object.assign(response, { stack: error.stack })
+      // Add stack trace in development
+      if (config.isDevelopment && error.stack) {
+        response.stack = error.stack
       }
 
       // Send the response

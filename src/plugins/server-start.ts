@@ -1,3 +1,4 @@
+import { host, port } from '../config'
 import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
 
@@ -19,13 +20,7 @@ const defineServerStartPlugin: FastifyPluginAsync = async (
 ): Promise<void> => {
   server.decorate('start', async function (this: FastifyInstance) {
     try {
-      const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 3000
-      const host =
-        process.env.HOST ??
-        (process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost')
-
-      // Start the server
-      await this.listen({ port, host })
+      await this.listen({ host, port })
 
       // Handle graceful shutdown
       const shutdown = async () => {
