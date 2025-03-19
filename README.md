@@ -54,3 +54,46 @@ pnpm run build
 ```bash
 pnpm start
 ```
+
+## Usage
+
+### Basic Server Initialization
+
+The simplest way to start the server:
+
+```typescript
+async function startServer() {
+  const server = await createServer({})
+  await server.start()
+}
+```
+
+### Configuring Plugins
+
+All plugins can be configured through the options object passed to `createServer`:
+
+```typescript
+async function startServer() {
+  const server = await createServer({
+    // Configure CORS
+    cors: {
+      origin: ['https://your-domain.com'],
+      credentials: true
+    },
+    // Configure rate limiting
+    rateLimit: {
+      max: 100,
+      timeWindow: '1 minute'
+    },
+    // Configure custom health check response
+    healthCheck: {
+      status: 'ok',
+      version: '1.0.0'
+    }
+  })
+
+  await server.start()
+}
+```
+
+The server will start on port 3000 by default, or you can set the `PORT` environment variable to specify a different port.
