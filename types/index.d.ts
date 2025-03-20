@@ -1,12 +1,12 @@
 /// <reference types='node' />
 import type { FastifyPluginAsync } from 'fastify'
-import type { CookieOptions } from './cookie'
-import type { CorsOptions } from './cors'
-import type { HealthCheckOptions } from './health-check'
-import type { HelmetOptions } from './helmet'
-import type { LoggerPluginOptions } from './logger'
-import type { RateLimitOptions } from './rate-limit'
-import type { SwaggerOptions } from './swagger'
+import type { CookieOptions } from './plugins/cookie'
+import type { CorsOptions } from './plugins/cors'
+import type { HealthCheckOptions } from './plugins/health-check'
+import type { HelmetOptions } from './plugins/helmet'
+import type { LoggerPluginOptions } from './plugins/logger'
+import type { RateLimitOptions } from './plugins/rate-limit'
+import type { SwaggerOptions } from './plugins/swagger'
 
 // Extend FastifyInstance with start method
 declare module 'fastify' {
