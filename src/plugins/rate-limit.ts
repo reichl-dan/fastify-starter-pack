@@ -1,5 +1,5 @@
-import type { RateLimitOptions as FastifyRateLimitOptions } from '@fastify/rate-limit'
 import rateLimit from '@fastify/rate-limit'
+import type { RateLimitOptions as FastifyRateLimitOptions } from '@fastify/rate-limit'
 import type { FastifyInstance } from 'fastify'
 
 export type RateLimitOptions = Partial<FastifyRateLimitOptions>

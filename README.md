@@ -1,14 +1,14 @@
-# Fastify API Template with TypeScript and Biome
+# Fastify Core Plugin
 
-A modern Fastify API template that provides a robust foundation for building scalable web services. This template comes with a comprehensive set of pre-configured plugins and utilities that can be easily customized through a global configuration object when creating the server.
+A comprehensive Fastify plugin that combines essential plugins and utilities commonly required for API development. This plugin provides a robust foundation for building scalable web services with a single registration. All included plugins can be easily customized through a global configuration object.
 
 ## Features
 
+- **Plugin Collection**: Combines essential Fastify plugins into a single, easy-to-use package
 - **Type Safety**: Built with TypeScript for enhanced developer experience and code reliability
 - **Modern Tooling**: Uses Biome for fast, consistent code linting and formatting
-- **Development Ready**: Hot reload support for rapid development
-- **Production Optimized**: Includes essential security, monitoring, and performance features
-- **Flexible Configuration**: All plugins can be configured through a single configuration object
+- **Production Ready**: Includes essential security, monitoring, and performance features
+- **Flexible Configuration**: All bundled plugins can be configured through a single configuration object
 - **API Documentation**: Automatic Swagger/OpenAPI documentation in development mode
 
 ## Included Plugins
@@ -28,72 +28,56 @@ A modern Fastify API template that provides a robust foundation for building sca
 - **Server Start Plugin**: Graceful server startup/shutdown with environment-based configuration
 - **Health Check**: Built-in health check endpoint for monitoring
 
-## Prerequisites
+## Installation
 
-- Node.js
-- npm, pnpm, or yarn
-
-## Setup
-
-1. Install dependencies:
 ```bash
-pnpm install
-```
-
-2. Start the development server:
-```bash
-pnpm run dev
-```
-
-3. Build for production:
-```bash
-pnpm run build
-```
-
-4. Start the production server:
-```bash
-pnpm start
+npm install @fastify/core
+# or
+pnpm add @fastify/core
+# or
+yarn add @fastify/core
 ```
 
 ## Usage
 
-### Basic Server Initialization
+### Basic Usage
 
-The simplest way to start the server:
+The simplest way to use the plugin:
 
 ```typescript
+import fastify from 'fastify'
+import fastifyCore from '@fastify/core'
+
 async function startServer() {
-  const server = await createServer({})
-  await server.start()
+  const server = fastify()
+  await server.register(fastifyCore)
+  await server.listen({ port: 3000 })
+  return server
 }
 ```
 
 ### Configuring Plugins
 
-All plugins can be configured through the options object passed to `createServer`:
+All bundled plugins can be configured through an options object when registering the core plugin:
 
 ```typescript
-async function startServer() {
-  const server = await createServer({
-    // Configure CORS
-    cors: {
-      origin: ['https://your-domain.com'],
-      credentials: true
-    },
-    // Configure rate limiting
-    rateLimit: {
-      max: 100,
-      timeWindow: '1 minute'
-    },
-    // Configure custom health check response
-    healthCheck: {
-      status: 'ok',
-      version: '1.0.0'
-    }
-  })
-
-  await server.start()
-}
+await server.register(fastifyCore, {
+  // Configure CORS
+  cors: {
+    origin: ['https://your-domain.com'],
+    credentials: true
+  },
+  // Configure rate limiting
+  rateLimit: {
+    max: 100,
+    timeWindow: '1 minute'
+  },
+  // Configure custom health check response
+  healthCheck: {
+    status: 'ok',
+    version: '1.0.0'
+  }
+})
 ```
 
-The server will start on port 3000 by default, or you can set the `PORT` environment variable to specify a different port.
+The server will use default configurations if no options are provided. You can override any plugin's configuration by passing the appropriate options object.

@@ -1,5 +1,5 @@
-import type { FastifyHelmetOptions } from '@fastify/helmet'
 import helmet from '@fastify/helmet'
+import type { FastifyHelmetOptions } from '@fastify/helmet'
 import type { FastifyInstance } from 'fastify'
 
 export type HelmetOptions = Partial<FastifyHelmetOptions>

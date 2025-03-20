@@ -1,16 +1,16 @@
 {
-  "name": "fastify-starter-pack",
-  "version": "1.0.2",
-  "description": "A Fastify API template with some batteries included",
+  "name": "fastify-core",
+  "version": "1.0.0",
+  "description": "A Fastify plugin that bundles commonly used plugins and utilities for developing a Fastify API",
   "author": "Dan Reichl <reichl.daniel.p@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist"],
-  "keywords": ["fastify", "template", "api"],
+  "keywords": ["fastify", "plugin", "template", "bundle", "api"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reichl-dan/fastify-starter-pack"
+    "url": "git+https://github.com/reichl-dan/fastify-core"
   },
   "engines": {
     "node": ">=18"

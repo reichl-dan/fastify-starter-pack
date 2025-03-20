@@ -1,7 +1,7 @@
+import fp from 'fastify-plugin'
 import swagger, { type FastifyDynamicSwaggerOptions } from '@fastify/swagger'
 import swaggerUi, { type FastifySwaggerUiOptions } from '@fastify/swagger-ui'
 import type { FastifyInstance } from 'fastify'
-import fp from 'fastify-plugin'
 
 export interface SwaggerOptions {
   /**
@@ -48,8 +48,8 @@ async function defineSwaggerPlugin(
  * Wraps the Swagger plugin into fastify
  */
 const swaggerPlugin = fp(defineSwaggerPlugin, {
-  name: 'swagger-plugin',
-  dependencies: ['logger-plugin'],
+  name: '@fastify-core/swagger',
+  dependencies: ['@fastify-core/logger'],
 })
 
 /**

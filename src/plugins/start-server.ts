@@ -1,12 +1,18 @@
 import { host, port } from '../config'
-import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
+import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
+
+declare module 'fastify' {
+  interface FastifyInstance {
+    start: () => Promise<void>
+  }
+}
 
 /**
  * Defines the server start plugin functionality
  * @param server - The Fastify server instance
  */
-const defineServerStartPlugin: FastifyPluginAsync = async (
+const defineStartServerPlugin: FastifyPluginAsync = async (
   server: FastifyInstance,
 ): Promise<void> => {
   server.decorate('start', async function (this: FastifyInstance) {
@@ -39,14 +45,14 @@ const defineServerStartPlugin: FastifyPluginAsync = async (
 /**
  * Wraps the start plugin into fastify
  */
-const serverStartPlugin = fp(defineServerStartPlugin, {
-  name: 'server-start-plugin',
+const startServerPlugin = fp(defineStartServerPlugin, {
+  name: '@fastify-core/start-server',
 })
 
 /**
  * Registers the server start plugin
  * @param server - The Fastify server instance
  */
-export async function registerServerStart(server: FastifyInstance): Promise<void> {
-  await server.register(serverStartPlugin)
+export async function registerStartServer(server: FastifyInstance): Promise<void> {
+  await server.register(startServerPlugin)
 }

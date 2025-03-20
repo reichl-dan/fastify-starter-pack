@@ -1,4 +1,5 @@
 import * as config from '../config'
+import fp from 'fastify-plugin'
 import type {
   FastifyError,
   FastifyInstance,
@@ -6,7 +7,6 @@ import type {
   FastifyReply,
   FastifyRequest,
 } from 'fastify'
-import fp from 'fastify-plugin'
 
 export interface ErrorResponse {
   statusCode: number
@@ -67,8 +67,8 @@ const defineErrorHandlerPlugin: FastifyPluginAsync = async (
  * Wraps the error handler plugin into fastify
  */
 const errorHandlerPlugin = fp(defineErrorHandlerPlugin, {
-  name: 'error-handler-plugin',
-  dependencies: ['logger-plugin'],
+  name: '@fastify-core/error-handler',
+  dependencies: ['@fastify-core/logger'],
 })
 
 /**

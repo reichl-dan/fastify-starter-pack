@@ -1,39 +1,110 @@
-import fastify, { type FastifyInstance } from 'fastify'
-import { type PluginOptions, registerPlugins } from './plugins/_plugins'
-import './types'
+// import dependencies
+import * as config from './config'
+import fp from 'fastify-plugin'
+import type { FastifyInstance } from 'fastify'
+
+// import plugin types
+import type { CookieOptions } from './plugins/cookie'
+import type { CorsOptions } from './plugins/cors'
+import type { HealthCheckOptions } from './plugins/health-check'
+import type { HelmetOptions } from './plugins/helmet'
+import type { LoggerPluginOptions } from './plugins/logger'
+import type { RateLimitOptions } from './plugins/rate-limit'
+import type { SwaggerOptions } from './plugins/swagger'
 
 /**
- * Configuration options for the Fastify server instance
- * @interface ServerOptions
- * @extends {PluginOptions}
+ * Interface for plugin options
  */
-export interface ServerOptions extends PluginOptions {
-  /**
-   * Custom response for the health check endpoint
-   * @default "{ status: 'ok' }"
-   */
-  healthCheck?: object
+export interface FastifyCoreOptions {
+  cookie?: CookieOptions
+  cors?: CorsOptions
+  healthCheck?: HealthCheckOptions
+  helmet?: HelmetOptions
+  logger?: LoggerPluginOptions
+  rateLimit?: RateLimitOptions
+  swagger?: SwaggerOptions
 }
 
 /**
- * Creates a new Fastify server instance with the given options
- * @param {ServerOptions} options - Configuration options for the server and its plugins
- * @returns {Promise<FastifyInstance>} A configured Fastify server instance
- * @throws {Error} If plugin registration fails
+ * Registers all plugins with the given options
+ * @param server - The Fastify server instance
+ * @param options - The plugin options
  */
-export async function createServer(
-  options: ServerOptions = {},
-): Promise<FastifyInstance> {
-  // Create the server
-  const server = fastify()
+async function corePlugin(
+  server: FastifyInstance,
+  options?: FastifyCoreOptions,
+): Promise<void> {
+  // Register logger plugin
+  {
+    const { registerLogger } = await import('./plugins/logger.js')
+    await registerLogger(server, options?.logger)
+  }
 
-  // Register plugins
-  await registerPlugins(server, options)
+  // Register error handler plugin
+  {
+    const { registerErrorHandler } = await import('./plugins/error-handler.js')
+    await registerErrorHandler(server)
+  }
 
-  // Add health check route
-  server.get('/health', async () => {
-    return options.healthCheck ?? { status: 'ok' }
-  })
+  // Register monitoring plugin
+  {
+    const { registerMonitoring } = await import('./plugins/monitoring.js')
+    await registerMonitoring(server)
+  }
 
-  return server
+  // Register sensible plugin
+  {
+    const { registerSensible } = await import('./plugins/sensible.js')
+    await registerSensible(server)
+  }
+
+  // Register cors plugin
+  {
+    const { registerCors } = await import('./plugins/cors.js')
+    await registerCors(server, options?.cors)
+  }
+
+  // Register helmet plugin
+  {
+    const { registerHelmet } = await import('./plugins/helmet.js')
+    await registerHelmet(server, options?.helmet)
+  }
+
+  // Register cookie plugin
+  {
+    const { registerCookie } = await import('./plugins/cookie.js')
+    await registerCookie(server, options?.cookie)
+  }
+
+  // Register rate limit plugin
+  {
+    const { registerRateLimit } = await import('./plugins/rate-limit.js')
+    await registerRateLimit(server, options?.rateLimit)
+  }
+
+  // Register swagger plugin
+  if (config.isDevelopment) {
+    const { registerSwagger } = await import('./plugins/swagger.js')
+    await registerSwagger(server, options?.swagger)
+  }
+
+  // Register start decorator
+  {
+    const { registerStartServer } = await import('./plugins/start-server.js')
+    await registerStartServer(server)
+  }
+
+  // Register health route
+  {
+    const { registerHealthCheck } = await import('./plugins/health-check.js')
+    await registerHealthCheck(server, options?.healthCheck)
+  }
 }
+
+/**
+ * Fastify plugin for core functionality
+ */
+export default fp(corePlugin, {
+  name: 'fastify-core',
+  dependencies: [],
+})

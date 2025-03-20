@@ -1,8 +1,8 @@
 import * as config from '../config'
-import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
-import type { LoggerOptions as PinoLoggerOptions } from 'pino'
 import pino from 'pino'
+import type { LoggerOptions as PinoLoggerOptions } from 'pino'
+import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
 
 export type LoggerPluginOptions = Partial<PinoLoggerOptions>
 
@@ -17,16 +17,15 @@ const defineLoggerPlugin: FastifyPluginAsync = async (
 ): Promise<void> => {
   const pinoConfig: pino.LoggerOptions = {
     level: config.logLevel,
-    transport:
-      config.isDevelopment
-        ? {
-            target: 'pino-pretty',
-            options: {
-              translateTime: 'HH:MM:ss Z',
-              ignore: 'pid,hostname',
-            },
-          }
-        : undefined,
+    transport: config.isDevelopment
+      ? {
+          target: 'pino-pretty',
+          options: {
+            translateTime: 'HH:MM:ss Z',
+            ignore: 'pid,hostname',
+          },
+        }
+      : undefined,
     ...options,
   }
 
@@ -48,7 +47,7 @@ const defineLoggerPlugin: FastifyPluginAsync = async (
  * Wraps the logger plugin into fastify
  */
 const loggerPlugin = fp(defineLoggerPlugin, {
-  name: 'logger-plugin',
+  name: '@fastify-core/logger',
 })
 
 /**

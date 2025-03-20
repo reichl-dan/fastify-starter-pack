@@ -1,5 +1,5 @@
-import type { FastifyInstance, FastifyPluginAsync, FastifyRequest } from 'fastify'
 import fp from 'fastify-plugin'
+import type { FastifyInstance, FastifyPluginAsync, FastifyRequest } from 'fastify'
 
 // Extend FastifyRequest to include our custom properties
 declare module 'fastify' {
@@ -38,8 +38,8 @@ const defineMonitoringPlugin: FastifyPluginAsync = async (
  * Wraps the monitoring plugin into fastify
  */
 const monitoringPlugin = fp(defineMonitoringPlugin, {
-  name: 'monitoring-plugin',
-  dependencies: ['logger-plugin'],
+  name: '@fastify-core/monitoring',
+  dependencies: ['@fastify-core/logger'],
 })
 
 /**

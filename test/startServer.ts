@@ -1,8 +1,13 @@
+import fastify from 'fastify'
 import type { FastifyInstance } from 'fastify'
-import { type ServerOptions, createServer } from '../src'
+import corePlugin from '../src'
+import type { FastifyCoreOptions } from '../src'
 
-export async function startServer(options?: ServerOptions): Promise<FastifyInstance> {
-  const server = await createServer(options)
+export async function startServer(
+  options: FastifyCoreOptions = {},
+): Promise<FastifyInstance> {
+  const server = fastify()
+  await server.register(corePlugin, options)
   await server.start()
   return server
 }
