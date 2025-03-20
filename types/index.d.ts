@@ -23,7 +23,7 @@ type FastifyCore = FastifyPluginAsync<fastifyCore.FastifyCoreOptions>
 
 declare namespace fastifyCore {
   export interface FastifyCoreOptions {
-    cookie?: FastifyCoreOptions.CookieOptions
+    cookie?: CookieOptions
     cors?: CorsOptions
     healthCheck?: HealthCheckOptions
     helmet?: HelmetOptions
