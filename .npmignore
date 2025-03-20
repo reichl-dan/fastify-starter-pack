@@ -28,5 +28,11 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 
-# Build
-dist/
+# Development
+.devcontainer/
+.git/
+biome.json
+pnpm-lock.yaml
+src/
+test/
+tsconfig.json
