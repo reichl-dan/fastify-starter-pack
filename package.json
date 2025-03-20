@@ -1,6 +1,6 @@
 {
-  "name": "fastify-template",
-  "version": "1.0.0",
+  "name": "fastify-starter-pack",
+  "version": "1.0.1",
   "description": "A Fastify API template with some batteries included",
   "author": "Dan Reichl <reichl.daniel.p@gmail.com>",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "keywords": ["fastify", "template", "api"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/fastify-template"
+    "url": "git+https://github.com/reichl-dan/fastify-starter-pack"
   },
   "engines": {
     "node": ">=18"
