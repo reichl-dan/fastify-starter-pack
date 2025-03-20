@@ -2,12 +2,7 @@ import fastify from 'fastify'
 import fastifyCore from '../lib/index.js'
 
 /**
- * @typedef {import('fastify').FastifyInstance} FastifyInstance
- */
-
-/**
  * Starts a new Fastify server with the core plugin
- * @returns {Promise<FastifyInstance>}
  */
 async function startServer() {
   const server = fastify()

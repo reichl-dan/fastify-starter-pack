@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
@@ -10,6 +11,9 @@
     "checkJs": true,
     "noEmit": true
   },
-  "include": ["lib/**/*", "test/**/*"],
+  "paths": {
+    "types/*": ["./types/*"]
+  },
+  "include": ["lib/**/*", "test/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }
