@@ -51,7 +51,7 @@ import fastifyCore from '@fastify/core'
 async function startServer() {
   const server = fastify()
   await server.register(fastifyCore)
-  await server.listen({ port: 3000 })
+  await server.start()
   return server
 }
 ```
