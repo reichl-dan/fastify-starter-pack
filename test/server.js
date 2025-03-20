@@ -1,19 +1,23 @@
 import fastify from 'fastify'
-import type { FastifyInstance } from 'fastify'
-import corePlugin from '../src'
-import type { FastifyCoreOptions } from '../src'
+import fastifyCore from '../lib/index.js'
 
-export async function startServer(
-  options: FastifyCoreOptions = {},
-): Promise<FastifyInstance> {
+/**
+ * @typedef {import('fastify').FastifyInstance} FastifyInstance
+ */
+
+/**
+ * Starts a new Fastify server with the core plugin
+ * @returns {Promise<FastifyInstance>}
+ */
+async function startServer() {
   const server = fastify()
-  await server.register(corePlugin, options)
+  await server.register(fastifyCore)
   await server.start()
   return server
 }
 
 // Start server if this file is run directly
-if (require.main === module) {
+if (process.argv[1] === new URL(import.meta.url).pathname) {
   startServer()
     .then((server) => {
       const addresses = server.addresses()

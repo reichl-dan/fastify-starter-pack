@@ -1,12 +1,13 @@
 {
   "name": "fastify-core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Fastify plugin that bundles commonly used plugins and utilities for developing a Fastify API",
   "author": "Dan Reichl <reichl.daniel.p@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "index.d.ts",
+  "files": ["lib", "index.d.ts"],
   "keywords": ["fastify", "plugin", "template", "bundle", "api"],
   "repository": {
     "type": "git",
@@ -16,10 +17,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsx watch test/startServer.ts",
-    "prepare": "pnpm run build",
+    "dev": "node test/server.js",
     "lint": "biome lint . --write",
     "format": "biome format . --write",
     "check": "biome check . --write"
@@ -40,7 +38,6 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/node": "22.13.10",
-    "tsx": "4.19.3",
     "typescript": "5.8.2"
   }
 }
