@@ -1,5 +1,6 @@
 import fastify, { type FastifyInstance } from 'fastify'
 import { type PluginOptions, registerPlugins } from './plugins/_plugins'
+import './types'
 
 /**
  * Configuration options for the Fastify server instance

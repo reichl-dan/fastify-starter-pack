@@ -3,15 +3,6 @@ import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
 
 /**
- * Declares the start method on the FastifyInstance
- */
-declare module 'fastify' {
-  interface FastifyInstance {
-    start: () => Promise<void>
-  }
-}
-
-/**
  * Defines the server start plugin functionality
  * @param server - The Fastify server instance
  */
