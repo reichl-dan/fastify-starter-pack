@@ -10,7 +10,7 @@
   "keywords": ["fastify", "plugin", "template", "bundle", "api"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reichl-dan/fastify-core"
+    "url": "git+https://github.com/reichl-dan/fastify-core.git"
   },
   "engines": {
     "node": ">=18"
