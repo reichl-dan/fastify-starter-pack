@@ -1,6 +1,6 @@
 {
   "name": "fastify-core",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A Fastify plugin that bundles commonly used plugins and utilities for developing a Fastify API",
   "author": "Dan Reichl <reichl.daniel.p@gmail.com>",
   "license": "MIT",
