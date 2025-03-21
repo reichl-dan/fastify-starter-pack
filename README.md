@@ -5,8 +5,7 @@ A comprehensive Fastify plugin that combines essential plugins and utilities com
 ## Features
 
 - **Plugin Collection**: Combines essential Fastify plugins into a single, easy-to-use package
-- **Type Safety**: Built with TypeScript for enhanced developer experience and code reliability
-- **Modern Tooling**: Uses Biome for fast, consistent code linting and formatting
+- **Type Safety**: Includes TypeScript declarations for enhanced developer experience and code reliability
 - **Production Ready**: Includes essential security, monitoring, and performance features
 - **Flexible Configuration**: All bundled plugins can be configured through a single configuration object
 - **API Documentation**: Automatic Swagger/OpenAPI documentation in development mode
