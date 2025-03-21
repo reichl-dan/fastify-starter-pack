@@ -1,3 +1,3 @@
-export interface HealthCheckOptions {
-  healthCheck?: object
+export type HealthCheckOptions = {
+  [key: string]: unknown
 }
