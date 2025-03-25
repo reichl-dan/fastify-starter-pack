@@ -30,11 +30,11 @@ A comprehensive Fastify plugin that combines essential plugins and utilities com
 ## Installation
 
 ```bash
-npm install @fastify/core
+npm install fastify-core
 # or
-pnpm add @fastify/core
+pnpm add fastify-core
 # or
-yarn add @fastify/core
+yarn add fastify-core
 ```
 
 ## Usage
@@ -45,43 +45,58 @@ The simplest way to use the plugin:
 
 ```typescript
 import fastify from 'fastify'
-import fastifyCore from '@fastify/core'
+import fastifyCore from 'fastify-core'
 
-async function startServer() {
+async function main() {
   const server = fastify()
   await server.register(fastifyCore)
   await server.start()
   return server
 }
+
+main()
 ```
 
 ### Configuring Plugins
 
-All bundled plugins can be configured through an options object when registering the core plugin. Optional plugins like cors, cookie, and rate-limit are only included when their respective configurations are provided:
+All bundled plugins can be configured through an options object when registering the core plugin. Optional plugins like cors, cookie, and rate-limit are only included when their respective configurations are provided. Type declarations are provided, so auto-complete and typechecking can be used when configuring the plugins.
 
 ```typescript
-await server.register(fastifyCore, {
-  // Include and configure CORS
-  cors: {
-    origin: ['https://your-domain.com'],
-    credentials: true
-  },
-  // Include and configure cookie parsing
-  cookie: {
-    secret: "my-secret",
-    parseOptions: {}
-  },
-  // Include and configure rate limiting
-  rateLimit: {
-    max: 100,
-    timeWindow: '1 minute'
-  },
-  // Configure custom health check response
-  healthCheck: {
-    status: 'ok',
-    version: '1.0.0'
-  }
-})
+import fastify from 'fastify'
+import fastifyCore from 'fastify-core'
+
+async function main() {
+  const server = fastify()
+  await server.register({
+    // Include and configure CORS
+    cors: {
+      origin: ['https://your-domain.com'],
+      credentials: true,
+    },
+    // Include and configure cookie parsing
+    cookie: {
+      secret: "my-secret",
+      parseOptions: {},
+    },
+    // Include and configure rate limiting
+    rateLimit: {
+      max: 100,
+      timeWindow: '1 minute',
+    },
+    // Configure custom health check response
+    healthCheck: {
+      status: 'ok',
+      version: '1.0.0',
+    },
+  })
+  await server.start({
+    host: '0.0.0.0',
+    port: 8080,
+  })
+  return server
+}
+
+main()
 ```
 
 The server will use default configurations for required plugins if no options are provided. Optional plugins are only included when their configuration is specified in the options object.

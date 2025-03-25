@@ -16,7 +16,7 @@ if (process.argv[1] === new URL(import.meta.url).pathname) {
   startServer()
     .then((server) => {
       const addresses = server.addresses()
-      console.log('🚀 Server running on:', addresses)
+      console.log('🌎 Server running on:', addresses)
 
       if (process.env.NODE_ENV === 'development') {
         console.log(

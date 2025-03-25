@@ -17,14 +17,26 @@ export * from '@fastify/swagger-ui'
 export * from '@fastify/swagger'
 
 // *************************************************************************************
-// Extend FastifyInstance with custom plugins
+// Define types for the server start plugin
+
+/**
+ * Configuration options for server startup
+ */
+export interface ServerStartOptions {
+  /** The host to listen on */
+  host?: string
+  /** The port to listen on */
+  port?: number
+}
+
 declare module 'fastify' {
   interface FastifyInstance {
     /**
      * Starts the Fastify server with built-in handling for shutdown signals.
+     * @param {ServerStartOptions} [config] - Optional server configuration
      * @returns {Promise<void>}
      */
-    start(): Promise<void>
+    start(config?: ServerStartOptions): Promise<void>
   }
 }
 

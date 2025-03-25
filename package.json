@@ -1,6 +1,6 @@
 {
   "name": "fastify-core",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Fastify plugin that bundles commonly used plugins and utilities for developing a Fastify API",
   "author": "Dan Reichl <reichl.daniel.p@gmail.com>",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "check": "biome check . --write",
     "ci": "biome ci .",
     "clean": "rm -rf node_modules",
-    "dev": "node test/server.js"
+    "test": "node test/server.js"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
