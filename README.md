@@ -13,10 +13,10 @@ A comprehensive Fastify plugin that combines essential plugins and utilities com
 ## Included Plugins
 
 ### Official Fastify Plugins
-- `@fastify/cors`: Configurable CORS support
+- `@fastify/cors`: Configurable CORS support (included only when cors config is provided)
 - `@fastify/helmet`: Security headers for protection against common web vulnerabilities
-- `@fastify/cookie`: Cookie parsing and serialization
-- `@fastify/rate-limit`: Request rate limiting for API protection
+- `@fastify/cookie`: Cookie parsing and serialization (included only when cookie config is provided)
+- `@fastify/rate-limit`: Request rate limiting for API protection (included only when rateLimit config is provided)
 - `@fastify/sensible`: Adds useful utilities and HTTP helpers
 - `@fastify/swagger` & `@fastify/swagger-ui`: API documentation (development mode only)
 
@@ -57,16 +57,21 @@ async function startServer() {
 
 ### Configuring Plugins
 
-All bundled plugins can be configured through an options object when registering the core plugin:
+All bundled plugins can be configured through an options object when registering the core plugin. Optional plugins like cors, cookie, and rate-limit are only included when their respective configurations are provided:
 
 ```typescript
 await server.register(fastifyCore, {
-  // Configure CORS
+  // Include and configure CORS
   cors: {
     origin: ['https://your-domain.com'],
     credentials: true
   },
-  // Configure rate limiting
+  // Include and configure cookie parsing
+  cookie: {
+    secret: "my-secret",
+    parseOptions: {}
+  },
+  // Include and configure rate limiting
   rateLimit: {
     max: 100,
     timeWindow: '1 minute'
@@ -79,4 +84,4 @@ await server.register(fastifyCore, {
 })
 ```
 
-The server will use default configurations if no options are provided. You can override any plugin's configuration by passing the appropriate options object.
+The server will use default configurations for required plugins if no options are provided. Optional plugins are only included when their configuration is specified in the options object.
